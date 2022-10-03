@@ -1,3 +1,6 @@
+// @ts-ignore
+import { nds } from "../../Network"
+
 type Levels = Record<string | number, number>;
 type Id = string | number;
 interface Edge {
@@ -10,6 +13,12 @@ interface Edge {
 interface Node {
   id: Id;
   edges: Edge[];
+  lvl?: number;
+}
+
+interface NodeIdLvl {
+  id: Id;
+  lvl: number;
 }
 
 /**
@@ -185,6 +194,41 @@ function fillLevelsByDirection(
       }
     }
   }
+  console.log("node array in layout");
+  console.log(nodes);
 
+  console.log("levels after complete");
+  console.log(levels);
+
+  console.log("nds in layout");
+  console.log(nds);
+
+  // something strange here
+  /*nodes.forEach((node) => {
+    for (let i = 0; i < nds.length; i++)
+      if (nds[i].id == node.id) {
+        console.log("Changed "+ levels[i]+ " on ", nds[i].lvl +"\n");
+        levels[i] = nds[i].lvl;
+        return;
+      }
+  })*/
+  setTimeout(() => {
+    /*for (let i = 0; i < nds.length; i++)
+      levels[i] = -1;*/
+    if (nds.length != 0)
+    {
+      nds.forEach((node, i) => {
+        //console.log("Before = on " + i + " , lvl[i] = " + levels[i] + " , node(i).lvl = " + node.lvl);
+        levels[i] = node.lvl; //no space betwen longlive nodes
+        //console.log("After = on "+ i + " , lvl[i] = " + levels[i] + " , node(i).lvl = " + node.lvl);
+      });
+      /*for (let i = 0; i < nds.length; i++)
+        levels[i] = (levels[i] === -1)  ?  i : levels[i];*/
+    }
+  });//was timeout);
+
+
+  console.log("levels in new system");
+  console.log(levels);
   return levels;
 }

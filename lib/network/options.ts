@@ -37,6 +37,7 @@ const endPoints = [
 
 /* eslint-disable @typescript-eslint/naming-convention -- The __*__ format is used to prevent collisions with actual option names. */
 const nodeOptions: OptionsConfig = {
+  lvl: {number},
   borderWidth: { number },
   borderWidthSelected: { number, undefined: "undefined" },
   brokenImage: { string, undefined: "undefined" },
